@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu, macos, windows]
-        rust: [nightly, beta, stable, 1.62.0, stable 18 months ago, stable minus 8 releases]
+        rust: [nightly, beta, stable, 1.62.0]
         include:
           - os: ubuntu
             rust: 1.0.0
@@ -26,6 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Create toolchain file
+        shell: bash
         run: |
           echo "[toolchain]" >> rust-toolchain.toml
           echo "channel = \"${{matrix.rust}}\"" >> rust-toolchain.toml
