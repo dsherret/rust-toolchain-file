@@ -49,11 +49,14 @@ runs:
       if: runner.os != 'Windows'
       shell: bash
 
+    # Would be better to have a more specific command: https://github.com/rust-lang/rustup/issues/2686
     - name: rustup toolchain install
-      run: rustup toolchain install --no-self-update
+      # https://github.com/rust-lang/rustup/issues/1397
+      run: rustup show
       shell: bash
 
-    - id: rustc-version
+    - name: rustup toolchain install
+      id: rustc-version
       run: |
         : create cachekey
         DATE=$(rustc --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
