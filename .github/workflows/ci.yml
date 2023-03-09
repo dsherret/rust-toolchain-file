@@ -34,8 +34,6 @@ jobs:
       - uses: ./
         name: Run dsherret/rust-toolchain-file${{contains(matrix.rust, ' ') && ' for ' || '@'}}${{matrix.rust}}
         id: toolchain
-        with:
-          toolchain: ${{matrix.rust}}
       - name: echo ${{'${{steps.toolchain.outputs.cachekey}}'}}
         run: echo '${{steps.toolchain.outputs.cachekey}}'
       - name: check ${{'${{steps.toolchain.outputs.cachekey}}'}}

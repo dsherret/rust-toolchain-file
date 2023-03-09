@@ -44,7 +44,7 @@ runs:
       run: rustup show active-toolchain
       shell: bash
 
-    - name: rustup toolchain install
+    - name: create cache key
       id: rustc-version
       run: |
         : create cachekey
