@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dsherret/rust-toolchain-file@1
+      - uses: dsherret/rust-toolchain-file@v1
       - run: cargo test --all-features
 ```
 
