@@ -1,4 +1,4 @@
-name: rust-toolchain.toml setup
+name: rust-toolchain.toml install
 author: David Tolnay, David Sherret
 description: Install the Rust toolchain via a rust-toolchain.toml file
 branding:
