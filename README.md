@@ -1,10 +1,20 @@
 # Install Rust Toolchain via rust-toolchain.toml
 
-Fork of https://github.com/dtolnay/rust-toolchain that supports and makes it mandatory to use a rust-toolchain.toml file.
+GitHub Action to install Rust's toolchain via a
+[`rust-toolchain.toml`](https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file)
+file.
+
+Fork of https://github.com/dtolnay/rust-toolchain that supports and makes it
+mandatory to use a rust-toolchain.toml file. Unfortunately that project did not
+want to support installing from a rust-toolchain.toml file. If you do not want
+to use a rust-toolchain.toml file, then please use that project as this action
+does not support other inputs.
 
 ## Example workflow
 
-Create a [`rust-toolchain.toml`](https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file) file:
+Create a
+[`rust-toolchain.toml`](https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file)
+file:
 
 ```toml
 [toolchain]
@@ -12,7 +22,7 @@ channel = "1.68"
 components = [ "rustfmt", "clippy" ]
 ```
 
-Then add an entry to this action in your github actions:
+Then add an entry to this action in your GitHub Actions workflow file:
 
 ```yaml
 name: test suite
@@ -53,7 +63,7 @@ None. You must define everything in the rust-toolchain.toml file.
 
 ## License
 
-The scripts and documentation in this project are released under the [MIT
-License].
+The scripts and documentation in this project are released under the
+[MIT License].
 
 [MIT License]: LICENSE
