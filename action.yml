@@ -41,7 +41,7 @@ runs:
     # Would be better to have a more specific command: https://github.com/rust-lang/rustup/issues/2686
     - name: rustup toolchain install
       # https://github.com/rust-lang/rustup/issues/1397
-      run: rustup show
+      run: rustup show active-toolchain
       shell: bash
 
     - name: rustup toolchain install
