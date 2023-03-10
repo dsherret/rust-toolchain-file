@@ -16,28 +16,28 @@ that project as this action does not support other inputs.
    [`rust-toolchain.toml`](https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file)
    file in the root directory of your repository:
 
-```toml
-[toolchain]
-channel = "1.68"
-components = [ "rustfmt", "clippy" ]
-```
+   ```toml
+   [toolchain]
+   channel = "1.68"
+   components = [ "rustfmt", "clippy" ]
+   ```
 
 2. Add an entry to this action in your GitHub Actions workflow file (ensure the
    repo is checked out first):
 
-```yaml
-name: test suite
-on: [push, pull_request]
+   ```yaml
+   name: test suite
+   on: [push, pull_request]
 
-jobs:
-  test:
-    name: cargo test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: dsherret/rust-toolchain-file@v1
-      - run: cargo test --all-features
-```
+   jobs:
+     test:
+       name: cargo test
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v3
+         - uses: dsherret/rust-toolchain-file@v1
+         - run: cargo test --all-features
+   ```
 
 The selection of Rust toolchain on the CI will then be made based on the
 rust-toolchain.toml file enabling you to easily keep it in sync with your local
