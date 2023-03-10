@@ -20,7 +20,7 @@ runs:
       run: |
         if [[ -f "rust-toolchain" || -f "rust-toolchain.toml" ]]
         then
-          echo "found toolchain"
+          echo "Found toolchain file"
         else
           echo "No rust-toolchain or rust-toolchain.toml file found in repo."
           echo "Please ensure the repo is checked out first or add this file."
@@ -29,19 +29,19 @@ runs:
         fi
       shell: bash
 
+    # `rustup show` will install, but it would be better to
+    # have a specific command: https://github.com/rust-lang/rustup/issues/2686
+    #
+    # Note: GitHub actions will automatically use the Rust version specified in
+    # the root directory, so we can skip the `rustup show active-toolchain`
     - run: |
         : install rustup if needed
         if ! command -v rustup &>/dev/null; then
           curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused -fsSL "https://sh.rustup.rs" | sh -s -- --default-toolchain none -y
           echo "${CARGO_HOME:-$HOME/.cargo}/bin" >> $GITHUB_PATH
+          rustup show active-toolchain
         fi
       if: runner.os != 'Windows'
-      shell: bash
-
-    # Would be better to have a more specific command: https://github.com/rust-lang/rustup/issues/2686
-    - name: rustup toolchain install
-      # https://github.com/rust-lang/rustup/issues/1397
-      run: rustup show active-toolchain
       shell: bash
 
     - name: create cache key
