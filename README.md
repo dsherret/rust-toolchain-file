@@ -1,20 +1,20 @@
 # Install Rust Toolchain via rust-toolchain.toml
 
-GitHub Action to install Rust's toolchain via a
+GitHub Action to install Rust's toolchain via the
 [`rust-toolchain.toml`](https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file)
-file.
+file in your repository.
 
 Fork of https://github.com/dtolnay/rust-toolchain that supports and makes it
-mandatory to use a rust-toolchain.toml file. Unfortunately that project did not
-want to support installing from a rust-toolchain.toml file. If you do not want
-to use a rust-toolchain.toml file, then please use that project as this action
-does not support other inputs.
+mandatory to use a rust-toolchain.toml file. Unfortunately `rust-toolchain` did
+not want to support installing from a rust-toolchain.toml file, so this project
+exists. If you do not want to use a rust-toolchain.toml file, then please use
+that project as this action does not support other inputs.
 
 ## Example workflow
 
-Create a
-[`rust-toolchain.toml`](https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file)
-file:
+1. Create a
+   [`rust-toolchain.toml`](https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file)
+   file in the root directory of your repository:
 
 ```toml
 [toolchain]
@@ -22,7 +22,8 @@ channel = "1.68"
 components = [ "rustfmt", "clippy" ]
 ```
 
-Then add an entry to this action in your GitHub Actions workflow file:
+2. Add an entry to this action in your GitHub Actions workflow file (ensure the
+   repo is checked out first):
 
 ```yaml
 name: test suite
@@ -38,11 +39,13 @@ jobs:
       - run: cargo test --all-features
 ```
 
-The selection of Rust toolchain is made based on the rust-toolchain.toml file.
+The selection of Rust toolchain on the CI will then be made based on the
+rust-toolchain.toml file enabling you to easily keep it in sync with your local
+development versions and have a single source of truth for what version to use.
 
 ## Inputs
 
-None. You must define everything in the rust-toolchain.toml file.
+You must define everything in the rust-toolchain.toml file.
 
 ## Outputs
 
