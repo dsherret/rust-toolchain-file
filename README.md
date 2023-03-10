@@ -10,6 +10,12 @@ not want to support installing from a rust-toolchain.toml file, so this project
 exists. If you do not want to use a rust-toolchain.toml file, then please use
 that project as this action does not support other inputs.
 
+Note: GitHub actions now
+[automatically sets up](https://github.com/actions-rs/toolchain/issues/126#issuecomment-1463045252)
+the Rust version based on the rust-toolchain.toml, but it won't setup the other
+defaults from `dtolnay/rust-toolchain` for you like enabling colours on the CI
+as this action will.
+
 ## Example workflow
 
 1. Create a
