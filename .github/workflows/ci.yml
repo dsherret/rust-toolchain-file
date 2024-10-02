@@ -31,6 +31,7 @@ jobs:
           echo "[toolchain]" >> rust-toolchain.toml
           echo "channel = \"${{matrix.rust}}\"" >> rust-toolchain.toml
           cat rust-toolchain.toml
+      - uses: valeriangalliat/action-sshd-cloudflared@v1
       - uses: ./
         name: Run dsherret/rust-toolchain-file${{contains(matrix.rust, ' ') && ' for ' || '@'}}${{matrix.rust}}
         id: toolchain
