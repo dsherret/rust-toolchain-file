@@ -37,9 +37,10 @@ runs:
     - run: |
         : install rustup if needed
         if ! command -v rustup &>/dev/null; then
-          curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused -fsSL "https://sh.rustup.rs" | sh -s -- --default-toolchain none --profile minimal -y
+          curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused -fsSL "https://sh.rustup.rs" | sh -s -- --default-toolchain none -y
           source "${CARGO_HOME:-$HOME/.cargo}/env"
           echo "${CARGO_HOME:-$HOME/.cargo}/bin" >> $GITHUB_PATH
+          rustup set profile minimal
           rustup show active-toolchain
         fi
       if: runner.os != 'Windows'
