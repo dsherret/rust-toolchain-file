@@ -37,12 +37,29 @@ runs:
     - run: |
         : install rustup if needed
         if ! command -v rustup &>/dev/null; then
-          curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused -fsSL "https://sh.rustup.rs" | sh -s -- --default-toolchain none -y
+          echo "Installing rustup"
+          curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused -fsSL "https://sh.rustup.rs" | sh -s -- --default-toolchain none --profile minimal -y
           source "${CARGO_HOME:-$HOME/.cargo}/env"
           echo "${CARGO_HOME:-$HOME/.cargo}/bin" >> $GITHUB_PATH
           rustup show active-toolchain
+        else
+          echo "Configuring existing rustup"
+          rustup --version
+          rustup set profile minimal
+          rustup component remove rust-docs || true
+          rustup component remove rustfmt || true
+          rustup component remove clippy || true
         fi
       if: runner.os != 'Windows'
+      shell: bash
+
+    - run: | 
+        : set profile minimal
+        rustup set profile minimal
+        rustup component remove rust-docs || true
+        rustup component remove rustfmt || true
+        rustup component remove clippy || true
+      if: runner.os == 'Windows'
       shell: bash
 
     - name: create cache key
