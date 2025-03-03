@@ -29,18 +29,15 @@ runs:
         fi
       shell: bash
 
-    # `rustup show` will install, but it would be better to
-    # have a specific command: https://github.com/rust-lang/rustup/issues/2686
-    #
     # Note: GitHub actions will automatically use the Rust version specified in
-    # the root directory, so we can skip the `rustup show active-toolchain`
+    # the root directory, so we can skip the `rustup toolchain install`
     - run: |
         : install rustup if needed
         if ! command -v rustup &>/dev/null; then
           curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused -fsSL "https://sh.rustup.rs" | sh -s -- --default-toolchain none -y
           source "${CARGO_HOME:-$HOME/.cargo}/env"
           echo "${CARGO_HOME:-$HOME/.cargo}/bin" >> $GITHUB_PATH
-          rustup show active-toolchain
+          rustup show active-toolchain || rustup toolchain install
         fi
       if: runner.os != 'Windows'
       shell: bash
